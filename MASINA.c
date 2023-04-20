@@ -1,7 +1,3 @@
-/*
-Programul afiseaza un patrat pe care il translateaza
-pe axa x la apasarea sagetilor stanga, dreapta
-*/
 #include "glos.h"
 
 #include <GL/gl.h>
@@ -12,12 +8,12 @@ pe axa x la apasarea sagetilor stanga, dreapta
 void myinit(void);
 void CALLBACK display(void);
 void CALLBACK myReshape(GLsizei w, GLsizei h);
-void CALLBACK MutaStanga(void);
-void CALLBACK MutaDreapta(void);
-void CALLBACK MutaSus(void);
-void CALLBACK MutaSus(void);
-void CALLBACK rot_z_up(void);
-void CALLBACK rot_z_down(void);
+void CALLBACK MoveLeft(void);
+void CALLBACK MoveRight(void);
+void CALLBACK MoveUp(void);
+void CALLBACK MoveUp(void);
+void CALLBACK RotateUp(void);
+void CALLBACK RotateDown(void);
 
 
 static GLfloat x = 0, y = 0, alfa = 0, angle = 0.0;
@@ -62,136 +58,136 @@ void CALLBACK desenare() {
 	glColor3f(1.0, 0, 1.0);
 	glBegin(GL_QUADS);
 
-	// ******************FATA MASINII******************
-	// fata de sus
+	// ******************FRONT OF THE CAR******************
+	// top
 	glColor3f(0.0, 0, 1.0);
 	glVertex3f(0.1, -1.4, 0.6);
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(0.1, -1.4, 0.2);
 
-	// fata de jos
+	// bottom
 	glVertex3f(0.1, -1.6, 0.6);
 	glVertex3f(0.6, -1.6, 0.6);
 	glVertex3f(0.6, -1.6, 0.2);
 	glVertex3f(0.1, -1.6, 0.2);
 
-	// fata din stanga
+	// left
 	glVertex3f(0.1, -1.6, 0.6);
 	glVertex3f(0.1, -1.4, 0.6);
 	glVertex3f(0.1, -1.4, 0.2);
 	glVertex3f(0.1, -1.6, 0.2);
 
-	// fata din dreapta
+	// right
 	glVertex3f(0.6, -1.6, 0.6);
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(0.6, -1.6, 0.2);
 
-	// fata din fata
+	// front
 	glVertex3f(0.1, -1.6, 0.6);
 	glVertex3f(0.6, -1.6, 0.6);
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.1, -1.4, 0.6);
 
-	// fata din spate
+	// back
 	glVertex3f(0.1, -1.6, 0.2);
 	glVertex3f(0.6, -1.6, 0.2);
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(0.1, -1.4, 0.2);
 
-	// capota
+	// hood
 	glVertex3f(0.7, -1.13, 0.6);
 	glVertex3f(0.7, -1.13, 0.2);
 	glVertex3f(1.5, -1.13, 0.2);
 	glVertex3f(1.5, -1.13, 0.6);
 
-	// ******************SPATELE MASINII******************
-	// fata de sus
+	// ******************BACK OF THE CAR******************
+	// top
 	glColor3f(0.0, 0, 1.0);
 	glVertex3f(1.6, -1.3, 0.6);
 	glVertex3f(1.6, -1.3, 0.2);
 	glVertex3f(2, -1.4, 0.2);
 	glVertex3f(2, -1.4, 0.6);
 
-	// fata de jos
+	// bottom
 	glVertex3f(2, -1.6, 0.6);
 	glVertex3f(2, -1.6, 0.2);
 	glVertex3f(1.6, -1.6, 0.6);
 	glVertex3f(1.6, -1.6, 0.6);
 
-	// fata din dreapta
+	// right
 	glVertex3f(2, -1.4, 0.6);
 	glVertex3f(2, -1.4, 0.2);
 	glVertex3f(2, -1.6, 0.2);
 	glVertex3f(2, -1.6, 0.6);
 
-	// fata din stanga
+	// left
 	glVertex3f(1.6, -1.3, 0.6);
 	glVertex3f(1.6, -1.3, 0.2);
 	glVertex3f(1.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.6, 0.6);
 
-	// fata din spate
+	// back
 	glVertex3f(1.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.3, 0.2);
 	glVertex3f(2, -1.4, 0.2);
 	glVertex3f(2, -1.6, 0.2);
 
-	// fata din fata
+	// front
 	glVertex3f(1.6, -1.6, 0.6);
 	glVertex3f(1.6, -1.3, 0.6);
 	glVertex3f(2, -1.4, 0.6);
 	glVertex3f(2, -1.6, 0.6);
 
-	// ******************MIJLOCUL MASINII******************
-	// fata din fata
+	// ******************MIDDLE OF THE CAR******************
+	// front
 	glColor3f(0.0, 0.0, 1.0);
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.6, -1.6, 0.6);
 	glVertex3f(1.6, -1.6, 0.6);
 	glVertex3f(1.6, -1.3, 0.6);
 
-	// fata de sus
+	// top
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(1.6, -1.3, 0.2);
 	glVertex3f(1.6, -1.3, 0.6);
 
-	// fata de jos
+	// bottom
 	glVertex3f(0.6, -1.6, 0.6);
 	glVertex3f(0.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.6, 0.6);
 
-	// fata din spate
+	// back
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(0.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.6, 0.2);
 	glVertex3f(1.6, -1.3, 0.2);
 
-	// ******************GEAMURI******************
-	// parbriz
+	// ******************WINDOWS******************
+	// windshield
 	glColor3f(0.8, 0.8, 0.8);
 	glVertex3f(0.6, -1.3, 0.6);
 	glVertex3f(0.6, -1.3, 0.2);
 	glVertex3f(0.7, -1.13, 0.2);
 	glVertex3f(0.7, -1.13, 0.6);
 
-	// luneta
+	// rear window
 	glVertex3f(1.5, -1.13, 0.6);
 	glVertex3f(1.5, -1.13, 0.2);
 	glVertex3f(1.6, -1.3, 0.2);
 	glVertex3f(1.6, -1.3, 0.6);
 
-	// geam lateral - fata din spate
+	// side back window
 	glColor3f(0.8, 0.8, 0.8);
 	glVertex3f(0.7, -1.13, 0.21);
 	glVertex3f(0.7, -1.3, 0.21);
 	glVertex3f(1.5, -1.3, 0.21);
 	glVertex3f(1.5, -1.13, 0.21);
 
-	// separatoare
+	// separators
 	glColor3f(1.0, 0.0, 1.0);
 	glVertex3f(0.7, -1.15, 0.2);
 	glVertex3f(0.6, -1.3, 0.2);
@@ -213,14 +209,14 @@ void CALLBACK desenare() {
 	glVertex3f(1.5, -1.15, 0.2);
 	glVertex3f(1.5, -1.13, 0.2);
 
-	// geam lateral - fata din fata
+	// side front window
 	glColor3f(0.8, 0.8, 0.8);
 	glVertex3f(0.7, -1.13, 0.59);
 	glVertex3f(0.7, -1.3, 0.59);
 	glVertex3f(1.5, -1.3, 0.59);
 	glVertex3f(1.5, -1.13, 0.59);
 
-	// separatoare
+	// separators
 	glColor3f(1.0, 0, 1.0);
 	glVertex3f(0.7, -1.13, 0.6);
 	glVertex3f(0.6, -1.3, 0.6);
@@ -244,7 +240,7 @@ void CALLBACK desenare() {
 
 	glEnd();
 
-	// ******************ROTILE******************
+	// ******************WHEELS******************
 	glColor3f(0, 0, 0);
 	glPushMatrix();
 
@@ -302,29 +298,29 @@ void CALLBACK desenare() {
 
 }
 
-void CALLBACK MutaStanga(void)
+void CALLBACK MoveLeft(void)
 {
 	x = x - 0.1;
 	angle = angle + 10;
 }
-void CALLBACK MutaDreapta(void)
+void CALLBACK MoveRight(void)
 {
 	x = x + 0.1;
 	angle = angle - 10;
 }
-void CALLBACK MutaSus(void)
+void CALLBACK MoveUp(void)
 {
 	y = y + 0.1;
 }
-void CALLBACK MutaJos(void)
+void CALLBACK MoveDown(void)
 {
 	y = y - 0.1;
 }
-void CALLBACK rot_z_up(void)
+void CALLBACK RotateUp(void)
 {
 	alfa = alfa + 20;
 }
-void CALLBACK rot_z_down(void)
+void CALLBACK RotateDown(void)
 {
 	alfa = alfa - 20;
 }
@@ -366,14 +362,14 @@ int main(int argc, char** argv)
 {
 	auxInitDisplayMode(AUX_SINGLE | AUX_RGB | AUX_DEPTH);
 	auxInitPosition(0, 0, 300, 200);
-	auxInitWindow("O super masina");
+	auxInitWindow("Super car");
 	myinit();
-	auxKeyFunc(AUX_LEFT, MutaStanga);
-	auxKeyFunc(AUX_RIGHT, MutaDreapta);
-	auxKeyFunc(AUX_UP, MutaSus);
-	auxKeyFunc(AUX_DOWN, MutaJos);
-	auxMouseFunc(AUX_LEFTBUTTON, AUX_MOUSEDOWN, rot_z_up);
-	auxMouseFunc(AUX_RIGHTBUTTON, AUX_MOUSEDOWN, rot_z_down);
+	auxKeyFunc(AUX_LEFT, MoveLeft);
+	auxKeyFunc(AUX_RIGHT, MoveRight);
+	auxKeyFunc(AUX_UP, MoveUp);
+	auxKeyFunc(AUX_DOWN, MoveDown);
+	auxMouseFunc(AUX_LEFTBUTTON, AUX_MOUSEDOWN, RotateUp);
+	auxMouseFunc(AUX_RIGHTBUTTON, AUX_MOUSEDOWN, RotateDown);
 
 	auxReshapeFunc(myReshape);
 	auxMainLoop(display);
